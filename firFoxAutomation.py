@@ -19,10 +19,51 @@ proxy_user = "package-10001-country-us"  # Replace with ProxyEmpire username
 proxy_pass = "Z69zPkXzsZf58IkP"  # Replace with ProxyEmpire password
 
 # List of sample first and last names for randomization
-first_names = ["John", "Jane", "Alex", "Emily", "Chris", "Michael", "Sarah", "David", "Amanda", "James", "Jessica", "Robert"]
-last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Martinez", "Hernandez"]
-domain_names = ["coursesman", "eliteemailtech", "emailexperthub", "emailnetworkpro", "emailorbit"]
-
+first_names = ["John", "Jane", "Alex", "Emily", "Chris", "Michael", "Sarah", "David", "Amanda", "James", 
+"Jessica", "Robert", "Ashley", "William", "Mary", "Daniel", "Linda", "Joseph", "Elizabeth", 
+"Charles", "Susan", "Matthew", "Karen", "Andrew", "Nancy", "Thomas", "Betty", "Mark", "Helen", 
+"Joshua", "Dorothy", "Steven", "Patricia", "Paul", "Deborah", "Kevin", "Ruth", "Brian", "Sharon", 
+"Steven", "Cynthia", "Brian", "Margaret", "George", "Betty", "Edward", "Carol", "Jack", "Helen", 
+"Ryan", "Denise", "Gary", "Grace", "Adam", "Ann", "Aaron", "Megan", "Samuel", "Irene", "Gregory", 
+"Emily", "Philip", "Alice", "Ethan", "Rose", "Jack", "Ruby", "Henry", "Lori", "Frank", "Martha", 
+"Samuel", "Barbara", "Leo", "Jean", "Nicholas", "Alice", "Oliver", "Anna", "Steven", "Zoe", 
+"Peter", "Lucy", "Jake", "Sarah", "Victor", "Chloe", "Adam", "Sophia", "Liam", "Victoria", 
+"Benjamin", "Julia", "Thomas", "Ella", "Lucas", "Grace", "Ryan", "Maria", "Daniel", "Carla", 
+"Paul", "Lisa", "Timothy", "Samantha", "Jack", "Sophie", "Brian", "Leah", "Christian", "Lily", 
+"Matthew", "Chloe", "Jacob", "Charlotte", "Eli", "Ivy", "Elijah", "Lena", "Marcus", "Rachel"]
+last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Martinez", "Hernandez",
+"Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee",
+"Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Roberts", "Walker",
+"Young", "Allen", "King", "Scott", "Green", "Adams", "Baker", "Gonzales", "Nelson", "Carter",
+"Mitchell", "Perez", "Robinson", "Hughes", "Green", "Campbell", "Bailey", "Murphy", "Rivera", "Cook",
+"Rogers", "Morgan", "Cooper", "Reed", "Bailey", "Bell", "Ward", "Flores", "Harris", "Graham",
+"Diaz", "Wright", "Cameron", "James", "Morris", "Graham", "Garrett", "Hughes", "Jennings", "Burns",
+"Price", "Hughes", "Collins", "Morris", "Rodriguez", "Foster", "Bryant", "Alexander", "Hudson", "Russell",
+"Carson", "Simmons", "Bryant", "Kim", "Ward", "Douglas", "Jenkins", "Reynolds", "Hamilton", "Gibson",
+"Webb", "Fox", "Cross", "Simmons", "Freeman", "Chapman", "Stewart", "Chavez", "Woods", "Hawkins",
+"Grant", "Russell", "Fox", "Chavez", "Sanders", "Murray", "Ford", "Jenkins", "Stephens", "Mason",
+"Howard", "Stevens", "Knight", "Wells", "Mendez", "Richards", "Sullivan", "Butler", "Hunter", "Hicks"]
+domain_names = ["coursesman", 
+"eliteemailtech", 
+"emailexperthub", 
+"emailnetworkpro", 
+"emailorbit", 
+"emailprox", 
+"emailsyncpro", 
+"emailzeal", 
+"foxsoftmail", 
+"fprai", 
+"itsdollar", 
+"itsmefox", 
+"mailcrafted", 
+"mohamedfekri", 
+"mohamedfox", 
+"newcareertime", 
+"remoteworkmail", 
+"secondad", 
+"wolfpoints",
+"yahoo",
+"Hotmail"]
 # Function to set up WebDriver with ProxyEmpire rotating proxy
 def setup_driver_with_proxy():
     firefox_options = Options()
