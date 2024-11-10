@@ -74,15 +74,15 @@ def setup_driver_with_proxy():
     # Initialize the WebDriver with the SOCKS5 proxy and options
     driver = webdriver.Chrome(
         options=chrome_options, 
-        # seleniumwire_options={
-        #     'proxy': {
-        #         # SOCKS5 Proxy Configuration for HTTP and HTTPS
-        #         'http': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
-        #         'https': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
-        #     },
-        #     'request_storage_base_dir': 'your_storage_dir',
-        #     'timeout': 30  # Timeout in seconds
-        # }
+        seleniumwire_options={
+            'proxy': {
+                # SOCKS5 Proxy Configuration for HTTP and HTTPS
+                'http': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
+                'https': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
+            },
+            'request_storage_base_dir': 'your_storage_dir',
+            'timeout': 30  # Timeout in seconds
+        }
     )
     return driver
 
@@ -206,9 +206,10 @@ if __name__ == "__main__":
     # Set up argument parsing
     parser = argparse.ArgumentParser(description="Automate account creation using multiple browsers in threads.")
     parser.add_argument('--total_accounts', type=int, required=True, help='Total number of accounts to create')
+    parser.add_argument('--thread_count', type=int, required=True, help='Total number of accounts to create')
 
     # Parse the command-line arguments
     args = parser.parse_args()
 
     # Run the multi-threaded account creation with browsers
-    run_multithreaded_tasks(total_accounts=args.total_accounts)
+    run_multithreaded_tasks(total_accounts=args.total_accounts,thread_count=args.thread_count)
