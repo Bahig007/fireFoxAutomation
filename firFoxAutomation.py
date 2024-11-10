@@ -4,13 +4,11 @@ import time
 import string
 import os
 import argparse
-from selenium import webdriver
+from seleniumwire import webdriver
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.firefox import GeckoDriverManager
 
 # Define your ProxyEmpire rotating proxy URL (Optional)
 proxy_host = "rotating.proxyempire.io"
@@ -66,20 +64,26 @@ domain_names = ["coursesman",
 "Hotmail"]
 # Function to set up WebDriver with ProxyEmpire rotating proxy
 def setup_driver_with_proxy():
-    firefox_options = Options()
-    # Run Firefox in headless mode (optional)
-    #firefox_options.add_argument("--headless")
-    firefox_options.add_argument("--no-sandbox")
-    firefox_options.add_argument("--disable-dev-shm-usage")
-
-    # Set up the proxy
-    proxy = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
-    firefox_options.add_argument(f'--proxy-server={proxy}')
-
-    # Set the path to geckodriver in the same directory as the script
-    gecko_driver_path = os.path.join(os.getcwd(), "geckodriver.exe")
-    service = Service(gecko_driver_path)
-    driver = webdriver.Firefox(service=service, options=firefox_options)
+    # Set Chrome options for handling SSL/TLS errors
+    chrome_options = Options()
+    # chrome_options.add_argument('--headless')  # Optional: run headless if no UI is needed
+    chrome_options.add_argument('--ignore-certificate-errors')  # Ignore SSL certificate errors
+    chrome_options.add_argument('--disable-web-security')  # Disable web security features (optional)
+    chrome_options.add_argument('--disable-gpu')  # Optional: disable GPU for headless mode
+    
+    # Initialize the WebDriver with the SOCKS5 proxy and options
+    driver = webdriver.Chrome(
+        options=chrome_options, 
+        # seleniumwire_options={
+        #     'proxy': {
+        #         # SOCKS5 Proxy Configuration for HTTP and HTTPS
+        #         'http': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
+        #         'https': 'socks5://package-10001-country-us:Z69zPkXzsZf58IkP@rotating.proxyempire.io:5000',
+        #     },
+        #     'request_storage_base_dir': 'your_storage_dir',
+        #     'timeout': 30  # Timeout in seconds
+        # }
+    )
     return driver
 
 # Function to generate a random password
@@ -92,7 +96,7 @@ def generate_random_password(length=12):
 def generate_random_contact_info():
     first_name = random.choice(first_names)
     last_name = random.choice(last_names)
-    email = f"{first_name.lower()}{random.randint(1000, 9999)}@{random.choice(domain_names)}.com"
+    email = f"{first_name.lower()}{random.randint(1000, 99999999999999)}@{random.choice(domain_names)}.com"
     phone_number = f"{random.randint(100, 999)}{random.randint(100, 999)}{random.randint(1000, 9999)}"
     password = generate_random_password()  # Generate a random password
     return first_name, last_name, email, phone_number, password
@@ -112,7 +116,7 @@ def save_to_text_file(data):
 # Automate account creation with form filling after navigating to the registration page
 def create_account():
     driver = setup_driver_with_proxy()
-    wait = WebDriverWait(driver, 20)  # Increased wait time
+    # wait = WebDriverWait(driver, 20)  # Increased wait time
 
     try:
         # Step 1: Go to the login page
@@ -127,6 +131,8 @@ def create_account():
         first_name_input = wait.until(EC.presence_of_element_located((By.NAME, "firstName")))
         last_name_input = wait.until(EC.presence_of_element_located((By.NAME, "lastName")))
         email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
+        country_code_input = driver.find_element(By.ID, "react-select-2-input")
+        country_code_input.send_keys("US")  # Type the country code
         phone_input = wait.until(EC.presence_of_element_located((By.NAME, "phoneNumber.phoneNumber")))
         password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
 
@@ -139,7 +145,8 @@ def create_account():
         email_input.send_keys(email)
         phone_input.send_keys(phone_number)
         password_input.send_keys(password)
-
+        # The email address you entered is invalid
+        # Profile
         # Click the submit button
         submit_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Create account')]")))
         submit_button.click()
@@ -153,7 +160,8 @@ def create_account():
         }
         save_to_text_file(data)
         # Optional: Random delay
-        time.sleep(random.randint(1, 5))
+        # time.sleep(random.randint(1, 5))
+        time.sleep(100)
     except Exception as e:
         print(f"Error: {e}")
     finally:
